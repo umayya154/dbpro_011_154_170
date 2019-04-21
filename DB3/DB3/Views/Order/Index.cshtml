@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DB3.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.order_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_Medicine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.medicine_Id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_Medicine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.medicine_Id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
