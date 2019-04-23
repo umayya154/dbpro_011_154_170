@@ -45,10 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,24 +132,67 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BillController.cs" />
-    <Compile Include="Controllers\ComapnyController.cs" />
+    <Compile Include="Bill.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Company.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MedicineController.cs" />
-    <Compile Include="Controllers\OrderController.cs" />
-    <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bill.cs" />
-    <Compile Include="Models\Company.cs" />
+    <Compile Include="Medicine.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Medicine.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Sales.cs" />
+    <Compile Include="Models\Sells.cs" />
+    <Compile Include="Models\Stock.cs" />
+    <Compile Include="Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Salary.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sale.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Staff.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stock.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BillPage\index.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -159,11 +208,32 @@
     <Content Include="Content\template\images\4.jpg" />
     <Content Include="Content\template\images\5.jpg" />
     <Content Include="Content\template\images\6.jpg" />
+    <Content Include="Content\template\images\all1.jpg" />
+    <Content Include="Content\template\images\all10.jpg" />
+    <Content Include="Content\template\images\all11.jpg" />
+    <Content Include="Content\template\images\all2.jpg" />
+    <Content Include="Content\template\images\all4.jpg" />
+    <Content Include="Content\template\images\all6.jpg" />
+    <Content Include="Content\template\images\all7.jpg" />
+    <Content Include="Content\template\images\all8.jpg" />
+    <Content Include="Content\template\images\all9.jpg" />
     <Content Include="Content\template\images\arrow.png" />
     <Content Include="Content\template\images\arrows.png" />
     <Content Include="Content\template\images\bg.jpg" />
+    <Content Include="Content\template\images\cap1.jpg" />
+    <Content Include="Content\template\images\cap2.jpg" />
+    <Content Include="Content\template\images\cap3.jpg" />
+    <Content Include="Content\template\images\cap4.jpg" />
+    <Content Include="Content\template\images\cap5.jpg" />
+    <Content Include="Content\template\images\cap6.jpg" />
     <Content Include="Content\template\images\close.png" />
     <Content Include="Content\template\images\dott.png" />
+    <Content Include="Content\template\images\drp1.jpg" />
+    <Content Include="Content\template\images\drp3.jpg" />
+    <Content Include="Content\template\images\inj1.jpg" />
+    <Content Include="Content\template\images\inj3.jpg" />
+    <Content Include="Content\template\images\inj4.jpg" />
+    <Content Include="Content\template\images\inj5.jpg" />
     <Content Include="Content\template\images\left.png" />
     <Content Include="Content\template\images\med1.jpg" />
     <Content Include="Content\template\images\med2.jpg" />
@@ -177,10 +247,22 @@
     <Content Include="Content\template\images\p7.jpg" />
     <Content Include="Content\template\images\p8.jpg" />
     <Content Include="Content\template\images\right.png" />
+    <Content Include="Content\template\images\sy3.jpg" />
+    <Content Include="Content\template\images\syp1.jpg" />
+    <Content Include="Content\template\images\syp2.jpg" />
+    <Content Include="Content\template\images\syp3.jpg" />
     <Content Include="Content\template\images\t1.jpg" />
     <Content Include="Content\template\images\t2.jpg" />
     <Content Include="Content\template\images\t3.jpg" />
     <Content Include="Content\template\images\t4.jpg" />
+    <Content Include="Content\template\images\tab1.jpg" />
+    <Content Include="Content\template\images\tab4.jpg" />
+    <Content Include="Content\template\images\tab5.jpg" />
+    <Content Include="Content\template\images\tub1.jpg" />
+    <Content Include="Content\template\images\tab2.jpg" />
+    <Content Include="Content\template\images\tube3.jpg" />
+    <Content Include="Content\template\images\tube4.jpg" />
+    <Content Include="Content\template\images\tube5.jpg" />
     <Content Include="Content\template\js\bootstrap.js" />
     <Content Include="Content\template\js\controls.js" />
     <Content Include="Content\template\js\easing.js" />
@@ -195,6 +277,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\template\fonts\fontawesome-webfont.eot" />
@@ -204,6 +296,13 @@
     <Content Include="Content\template\fonts\FontAwesome.otf" />
     <Content Include="Content\template\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\template\fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -231,24 +330,9 @@
     <Content Include="Views\Shared\_Layoutcustomer.cshtml" />
     <Content Include="Views\Shared\_Layoutstaff.cshtml" />
     <Content Include="Views\Shared\_Layoutadmin.cshtml" />
-    <Content Include="Views\Bill\Index.cshtml" />
-    <Content Include="Views\Medicine\Index.cshtml" />
-    <Content Include="Views\Medicine\Create.cshtml" />
-    <Content Include="Views\Bill\Create.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Order\Create.cshtml" />
-    <Content Include="Views\Sales\Index.cshtml" />
-    <Content Include="Views\Sales\Create.cshtml" />
-    <Content Include="Views\Comapny\Index.cshtml" />
-    <Content Include="Views\Comapny\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BillPage\css\" />
-    <Folder Include="BillPage\fonts\" />
-    <Folder Include="BillPage\images\" />
-    <Folder Include="BillPage\js\" />
-    <Folder Include="BillPage\vendor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -262,6 +346,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
