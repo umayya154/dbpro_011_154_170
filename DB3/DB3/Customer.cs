@@ -20,7 +20,7 @@ namespace DB3
             this.Orders = new HashSet<Order>();
         }
     
-        public int user_id { get; set; }
+        public int customer_id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }

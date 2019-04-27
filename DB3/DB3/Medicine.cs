@@ -18,7 +18,7 @@ namespace DB3
         public Medicine()
         {
             this.Orders = new HashSet<Order>();
-            this.Sales = new HashSet<Sale>();
+            this.Sells = new HashSet<Sell>();
             this.Stocks = new HashSet<Stock>();
         }
     
@@ -30,12 +30,13 @@ namespace DB3
         public string Batch { get; set; }
         public string Type { get; set; }
         public Nullable<int> CompanyID { get; set; }
+        public string Weight { get; set; }
     
         public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sale> Sales { get; set; }
+        public virtual ICollection<Sell> Sells { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
     }
