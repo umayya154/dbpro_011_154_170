@@ -16,10 +16,10 @@ namespace DB3
     {
         public int Bill_id { get; set; }
         public System.DateTime Date { get; set; }
-        public Nullable<int> Price { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<int> CustomerID { get; set; }
-        public Nullable<int> OrderID { get; set; }
+        public int Price { get; set; }
+        public int Quantity { get; set; }
+        public int CustomerID { get; set; }
+        public int OrderID { get; set; }
     
         public virtual Order Order { get; set; }
     }
