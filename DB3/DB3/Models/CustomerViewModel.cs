@@ -10,7 +10,7 @@ namespace DB3.Models
 {
     public class CustomerViewModel
     {
-       
+        public int user_id { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Use letters only please")]
 

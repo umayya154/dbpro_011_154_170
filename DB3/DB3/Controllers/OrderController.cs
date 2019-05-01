@@ -13,15 +13,19 @@ namespace DB3.Controllers
         public ActionResult Index()
         {
             DB3Entities1 db = new DB3Entities1();
-            List<Order> o = new List<Order>();
+            List<Order> o = db.Orders.ToList();
             List<OrderViewModel> ol = new List<OrderViewModel>();
-            OrderViewModel oi = new OrderViewModel();
+            //OrderViewModel oi = new OrderViewModel();
             foreach(Order s in o)
             {
-                oi.Medicine_Name = s.Medicine_Name;
+                OrderViewModel oi = new OrderViewModel();
+                oi.order_id = s.order_id;
+               // oi.Medicine_Name = s.Medicine_Name;
                 oi.Quantity = s.Quantity;
                 oi.Price = s.Price;
-                oi.medicine_id = s.medicine_id;
+                Medicine c = db.Medicines.Where(x => x.Medicine_id == s.medicine_id).First();
+                oi.Medicine_Name = s.Medicine_Name;
+                //oi.medicine_id = s.medicine_id;
                 ol.Add(oi);
             }
             return View(ol);
@@ -46,18 +50,22 @@ namespace DB3.Controllers
             try
             {
                 DB3Entities1 db = new DB3Entities1();
-                Order o = new Order();
-                o.Medicine_Name = s.Medicine_Name;
-                o.Quantity = s.Quantity;
-                o.Price = s.Price;
-                o.medicine_id = s.medicine_id;
-                db.Orders.Add(o);
+               // Order o = new Order();
+                var order = new Order();
+                order.Medicine_Name = s.Medicine_Name;
+                order.Quantity = s.Quantity;
+                order.Price = s.Price;
+                var c = db.Medicines.Where(x => x.Medicine_Name == s.Medicine_Name).First();
+                order.medicine_id = c.Medicine_id;
+                //var d = db.Medicines.Where(x => x.Medicine_id == s.medicine_id).First();
+               
+                db.Orders.Add(order);
                 db.SaveChanges();
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -67,47 +75,42 @@ namespace DB3.Controllers
         public ActionResult Edit(int id)
         {
             DB3Entities1 db = new DB3Entities1();
-            List<Order> c = db.Orders.ToList();
+            
+            var s = db.Orders.Where(x => x.order_id == id).First();
+            //List<Order> c = db.Orders.ToList();
            OrderViewModel cs = new OrderViewModel();
-            foreach (Order s in c)
-            {
-                if (id == s.order_id)
-                {
+           
                     cs.Medicine_Name = s.Medicine_Name;
                     cs.Quantity = s.Quantity;
                     cs.Price = s.Price;
-                    
-                    cs.medicine_id = s.medicine_id;
-                }
-
-            }
+            var g = db.Medicines.Where(x => x.Medicine_id == s.medicine_id).First();
+            cs.type = g.Type;    
+                    //cs.medicine_id = s.medicine_id;
+                
             return View(cs);
         }
 
         // POST: Order/Edit/5
         [HttpPost]
-        public ActionResult Edit(OrderViewModel s,int iD = 0)
+        public ActionResult Edit(OrderViewModel s,int id)
         {
             try
             {
                 DB3Entities1 db = new DB3Entities1();
+                
+                var cs = db.Orders.Where(x => x.order_id == id).First();
                 List<Order> c = db.Orders.ToList();
-                foreach (Order cs in c)
-                {
-                    if (iD == cs.order_id)
-                    {
+                
                         s.Medicine_Name = cs.Medicine_Name;
                         s.Quantity = cs.Quantity;
                         s.Price = cs.Price;
-                        
+                // var g = db.Medicines.Where()
                         s.medicine_id = cs.medicine_id;
                         db.SaveChanges();
-                    }
-
-                }
+                    
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index", new { id = iD });
+                return RedirectToAction("Index", new { id =cs.medicine_id });
             }
             catch
             {

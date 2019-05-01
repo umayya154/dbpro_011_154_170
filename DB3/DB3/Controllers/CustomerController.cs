@@ -15,15 +15,16 @@ namespace DB3.Controllers
             DB3Entities1 db = new DB3Entities1();
             List<Customer> cs = db.Customers.ToList();
             List<CustomerViewModel> csv = new List<CustomerViewModel>();
-            CustomerViewModel c = new CustomerViewModel();
+            //CustomerViewModel c = new CustomerViewModel();
             foreach (Customer s in cs)
             {
 
-
+                CustomerViewModel c = new CustomerViewModel();
                 c.Name = s.Name;
                 c.Address = s.Address;
                 c.Phone = s.Phone;
                 c.status = s.status;
+                c.user_id = s.user_id;
                 //c.status = Convert.ToInt32('Pending');
                 c.city = s.city;
 
@@ -117,18 +118,18 @@ namespace DB3.Controllers
                 var cs = db.Customers.Where(x => x.user_id == id).First();
                 List<Customer> c = db.Customers.ToList();
                
-                        s.Name = cs.Name;
-                        s.Address = cs.Address;
-                        s.Phone = cs.Phone;
-                        s.status = cs.status;
+                        cs.Name = s.Name;
+                        cs.Address = s.Address;
+                        cs.Phone = s.Phone;
+                        cs.status = s.status;
                         //cs.status = Convert.ToInt32('Pending');
-                        s.city = cs.city;
+                        cs.city = s.city;
                         db.SaveChanges();
                     
 
                 // TODO: Add update logic here
 
-                return RedirectToAction("Edit", new { id = cs.user_id });
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -140,19 +141,19 @@ namespace DB3.Controllers
         public ActionResult Delete(int id)
         {
             DB3Entities1 db = new DB3Entities1();
-            var s = db.Customers.Where(x => x.user_id == id).First();
+            var cs = db.Customers.Where(x => x.user_id == id).First();
            
-            CustomerViewModel cs = new CustomerViewModel();
+            CustomerViewModel s = new CustomerViewModel();
            
-                    cs.Name = s.Name;
-                    cs.Address = s.Address;
-                    cs.Phone = s.Phone;
+                    s.Name = cs.Name;
+                    s.Address = cs.Address;
+                    s.Phone = cs.Phone;
                    // c.status = Convert.ToString(s.status);
-                    cs.status = s.status;
-                    cs.city = s.city;
+                    s.status = cs.status;
+                    s.city = cs.city;
                 
             
-                return View(cs);
+                return View(s);
         }
 
         // POST: Customer/Delete/5

@@ -83,7 +83,7 @@ namespace DB3.Controllers
                 
 
 
-                return RedirectToAction("MedicineDetails", new { id = medicine.Medicine_id });
+                return RedirectToAction("MedicineList");
             }
             catch
             {
@@ -161,7 +161,7 @@ namespace DB3.Controllers
                 // TODO: Add delete logic here
                 DB3Entities1 entity = new DB3Entities1();
                // Medicine m = entity.Medicines.Where(x => x.Medicine_id == id).First();
-                entity.prDelMedicine(id);
+                //entity.prDelMedicine(id);
                 entity.SaveChanges();
                 return RedirectToAction("MedicineList");
             }

@@ -1,16 +1,24 @@
 ﻿@model IEnumerable<DB3.Models.CustomerViewModel>
-<!--models.customerviewmodel-->
+
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
+<  <div class="agileits-heading">
+    <br /><br />
+    <h3>  Customer List</h3>
+    <br />
+</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user_id)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -21,6 +29,9 @@
             @Html.DisplayNameFor(model => model.Phone)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.city)
         </th>
         <th></th>
@@ -28,6 +39,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_id)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -38,12 +52,15 @@
             @Html.DisplayFor(modelItem => item.Phone)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.city)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /*id=Session["user_id"]*/ }) |
-            @Html.ActionLink("Details", "Details", new {  /*id=Session["user_id"]*/}) |
-            @Html.ActionLink("Delete", "Delete", new { /*id=item.Session["user_id"]*/ })
+            @Html.ActionLink("Edit", "Edit", new {  id=item.user_id }) |
+            @Html.ActionLink("Details", "Details", new {  id=item.user_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.user_id })
         </td>
     </tr>
 }
