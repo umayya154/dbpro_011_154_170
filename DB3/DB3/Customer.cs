@@ -14,11 +14,20 @@ namespace DB3
     
     public partial class Customer
     {
-        public int user_id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
+        public int customer_id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public string status { get; set; }
+        public Nullable<int> status { get; set; }
         public string city { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

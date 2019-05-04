@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "MedicineList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layoutstaff.cshtml";
 }
-
-<h2>MedicineList</h2>
-
+<div class="agileits-heading">
+    <h3> Add Medicine </h3>
+</div>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Medicine", "MedicineAdd")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.weight)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.company_Name)
@@ -60,15 +57,12 @@
             @Html.DisplayFor(modelItem => item.type)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.weight)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.company_Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "MedicineEdit", new { id=item.id }) |
+            @Html.ActionLink("Details", "MedicineDetails", new { id=item.id }) |
+            @Html.ActionLink("Delete", "MedicineDelete", new { id=item.id })
         </td>
     </tr>
 }
