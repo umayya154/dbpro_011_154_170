@@ -12,7 +12,7 @@ namespace DB3.Controllers
         // GET: Medicine
         public ActionResult MedicineList()
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities1 entity = new DB3Entities1();
             List<MedicineModel> mml = new List<MedicineModel>();
             List<Medicine> ml = entity.Medicines.ToList();
             foreach(Medicine m in ml)
@@ -36,9 +36,8 @@ namespace DB3.Controllers
         public ActionResult MedicineDetails(int id)
         {
 
-            DB3Entities2 entity = new DB3Entities2();
-            Medicine m = entity.Medicines.Where(x => x.Medicine_id == id).First();
-           // var m = entity.sp_docstatus(true).
+            DB3Entities1 entity = new DB3Entities1();
+            var m = entity.Medicines.Where(x => x.Medicine_id == id).First();
             MedicineModel mm = new MedicineModel();
             mm.name = m.Medicine_Name;
             mm.mfg_date = m.Mfg_Date;
@@ -67,7 +66,7 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add insert logic here
-                DB3Entities2 entity = new DB3Entities2();
+                DB3Entities1 entity = new DB3Entities1();
                 var medicine = new Medicine();
                 medicine.Medicine_Name = obj.name;
                 medicine.Mfg_Date = obj.mfg_date;
@@ -84,7 +83,7 @@ namespace DB3.Controllers
                 
 
 
-                return RedirectToAction("MedicineDetails", new { id = medicine.Medicine_id });
+                return RedirectToAction("MedicineList");
             }
             catch
             {
@@ -95,7 +94,7 @@ namespace DB3.Controllers
         // GET: Medicine/Edit/5
         public ActionResult MedicineEdit(int id)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities1 entity = new DB3Entities1();
             var m = entity.Medicines.Where(x => x.Medicine_id == id).First();
             MedicineModel mm = new MedicineModel();
             mm.name = m.Medicine_Name;
@@ -116,7 +115,7 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add update logic here
-                DB3Entities2 entity = new DB3Entities2();
+                DB3Entities1 entity = new DB3Entities1();
                 var m = entity.Medicines.Where(x => x.Medicine_id == id).First();
                 
                 obj.name = m.Medicine_Name;
@@ -139,7 +138,7 @@ namespace DB3.Controllers
         // GET: Medicine/Delete/5
         public ActionResult MedicineDelete(int id)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities1 entity = new DB3Entities1();
             var m = entity.Medicines.Where(x => x.Medicine_id == id).First();
             MedicineModel mm = new MedicineModel();
             mm.name = m.Medicine_Name;
@@ -160,9 +159,9 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add delete logic here
-                DB3Entities2 entity = new DB3Entities2();
+                DB3Entities1 entity = new DB3Entities1();
                // Medicine m = entity.Medicines.Where(x => x.Medicine_id == id).First();
-                entity.prDelMedicine(id);
+                //entity.prDelMedicine(id);
                 entity.SaveChanges();
                 return RedirectToAction("MedicineList");
             }

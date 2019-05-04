@@ -2,17 +2,13 @@
 
 @{
     ViewBag.Title = "CompanyList";
-    Layout = "~/Views/Shared/_Layoutstaff.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<  <div class="agileits-heading">
-    <br /><br />
-    <h3>  Company List</h3>
-    <br />
-</div>
+<h2>CompanyList</h2>
 
 <p>
-    @Html.ActionLink("Add Company", "CompanyAdd")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -28,24 +24,23 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contact)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "CompanyEdit", new { id = item.id }) |
-                @Html.ActionLink("Details", "CompanyDetails", new { id = item.id }) |
-                @Html.ActionLink("Delete", "CompanyDelete", new { id = item.id })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
 
 </table>
