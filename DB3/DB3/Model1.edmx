@@ -98,6 +98,19 @@
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Medicine_Id" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.customerview' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="customerview">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nchar" MaxLength="20" />
+          <Property Name="status" Type="nchar" MaxLength="10" />
+          <Property Name="city" Type="nchar" MaxLength="20" />
+        </EntityType>
         <Association Name="FK_Bill_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -180,6 +193,16 @@
           <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customerview" EntityType="Self.customerview" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [customerview].[user_id] AS [user_id], 
+    [customerview].[Name] AS [Name], 
+    [customerview].[Address] AS [Address], 
+    [customerview].[Phone] AS [Phone], 
+    [customerview].[status] AS [status], 
+    [customerview].[city] AS [city]
+    FROM [dbo].[customerview] AS [customerview]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Bill_Order" Association="Self.FK_Bill_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="Bill" EntitySet="Bill" />
@@ -315,6 +338,17 @@
           <Property Name="Medicine_Id" Type="Int32" />
           <NavigationProperty Name="Medicine" Relationship="Self.FK_Stock_Medicine" FromRole="Stock" ToRole="Medicine" />
         </EntityType>
+        <EntityType Name="customerview">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
         <Association Name="FK_Bill_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -387,7 +421,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB3Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DB3Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bills" EntityType="Self.Bill" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -397,6 +431,7 @@
           <EntitySet Name="Sales" EntityType="Self.Sale" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="Stocks" EntityType="Self.Stock" />
+          <EntitySet Name="customerviews" EntityType="Self.customerview" />
           <AssociationSet Name="FK_Bill_Order" Association="Self.FK_Bill_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="Bill" EntitySet="Bills" />
@@ -427,7 +462,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities1">
+        <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities2">
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="DB3Model.Bill">
               <MappingFragment StoreEntitySet="Bill">
@@ -527,6 +562,18 @@
                 <ScalarProperty Name="Stock_Id" ColumnName="Stock_Id" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Medicine_Id" ColumnName="Medicine_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customerviews">
+            <EntityTypeMapping TypeName="DB3Model.customerview">
+              <MappingFragment StoreEntitySet="customerview">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="city" ColumnName="city" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

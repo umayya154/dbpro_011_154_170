@@ -12,7 +12,7 @@ namespace DB3.Controllers
         // GET: Company
         public ActionResult CompanyList()
         {
-            DB3Entities1 e = new DB3Entities1();
+            DB3Entities2 e = new DB3Entities2();
             List<CompanyModel> cml = new List<CompanyModel>();
             List<Company> cl = e.Companies.ToList();
             foreach (Company c in cl)
@@ -60,7 +60,7 @@ namespace DB3.Controllers
                 company.Address = obj.Address;
                 company.Mobile_Number = obj.Contact;
 
-                DB3Entities1 e = new DB3Entities1();
+                DB3Entities2 e = new DB3Entities2();
                 e.Companies.Add(company);
                 e.SaveChanges();
 
@@ -133,7 +133,7 @@ namespace DB3.Controllers
              try
              {
                  // TODO: Add delete logic here
-                 DB3Entities1 entity = new DB3Entities1();
+                 DB3Entities2 entity = new DB3Entities2();
                  var c = entity.Companies.Where(x => x.Company_id == id).First();
                  entity.Companies.Remove(c);
                  entity.SaveChanges();

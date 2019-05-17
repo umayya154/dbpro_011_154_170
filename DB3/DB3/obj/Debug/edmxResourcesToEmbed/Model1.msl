@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities1">
+  <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities2">
     <EntitySetMapping Name="Bills">
       <EntityTypeMapping TypeName="DB3Model.Bill">
         <MappingFragment StoreEntitySet="Bill">
@@ -100,6 +100,18 @@
           <ScalarProperty Name="Stock_Id" ColumnName="Stock_Id" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Medicine_Id" ColumnName="Medicine_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customerviews">
+      <EntityTypeMapping TypeName="DB3Model.customerview">
+        <MappingFragment StoreEntitySet="customerview">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="city" ColumnName="city" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

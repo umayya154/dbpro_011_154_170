@@ -13,10 +13,10 @@ namespace DB3
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB3Entities1 : DbContext
+    public partial class DB3Entities2 : DbContext
     {
-        public DB3Entities1()
-            : base("name=DB3Entities1")
+        public DB3Entities2()
+            : base("name=DB3Entities2")
         {
         }
     
@@ -34,5 +34,6 @@ namespace DB3
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<customerview> customerviews { get; set; }
     }
 }

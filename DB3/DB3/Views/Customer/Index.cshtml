@@ -14,6 +14,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<p>
+   <a class="btn btn-primary " href="@Url.Action("CustomerReport")">Download Report</a>
+</p>
+
 <table class="table">
     <tr>
         <th>
@@ -59,7 +63,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new {  id=item.user_id }) |
-            @Html.ActionLink("Details", "Details", new {  id=item.user_id }) |
+           
             @Html.ActionLink("Delete", "Delete", new { id=item.user_id })
         </td>
     </tr>

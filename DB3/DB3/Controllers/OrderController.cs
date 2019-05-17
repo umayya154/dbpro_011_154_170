@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DB3.Models;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
 
 namespace DB3.Controllers
 {
@@ -13,7 +15,7 @@ namespace DB3.Controllers
         public ActionResult Index()
         {
             //
-            DB3Entities1 db = new DB3Entities1();
+            DB3Entities2 db = new DB3Entities2();
             List<Order> o = db.Orders.ToList();
             List<OrderViewModel> ol = new List<OrderViewModel>();
             //OrderViewModel oi = new OrderViewModel();
@@ -22,8 +24,8 @@ namespace DB3.Controllers
                 OrderViewModel oi = new OrderViewModel();
                 oi.order_id = s.order_id;
                // oi.Medicine_Name = s.Medicine_Name;
-                oi.Quantity = s.Quantity;
-                oi.Price = s.Price;
+               // oi.Quantity = s.Quantity;
+               // oi.Price = s.Price;
                 Medicine c = db.Medicines.Where(x => x.Medicine_id == s.medicine_id).First();
                 oi.Medicine_Name = c.Medicine_Name;
                 oi.type = c.Type;
@@ -31,6 +33,27 @@ namespace DB3.Controllers
                 ol.Add(oi);
             }
             return View(ol);
+        }
+        public ActionResult OrderReport()
+        {
+            DB3Entities2 db = new DB3Entities2();
+            List<Order> exam = new List<Order>();
+            exam = db.Orders.ToList();
+
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Report"), "CrystalReport2.rpt"));
+
+            rd.SetDataSource(exam);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "OrderList.pdf");
         }
 
         // GET: Order/Details/5
@@ -51,7 +74,7 @@ namespace DB3.Controllers
         {
             try
             {
-                DB3Entities1 db = new DB3Entities1();
+                DB3Entities2 db = new DB3Entities2();
                // Order o = new Order();
                 var order = new Order();
                 order.Medicine_Name = s.Medicine_Name;
@@ -76,15 +99,15 @@ namespace DB3.Controllers
         // GET: Order/Edit/5
         public ActionResult Edit(int id)
         {
-            DB3Entities1 db = new DB3Entities1();
+            DB3Entities2 db = new DB3Entities2();
             
             var s = db.Orders.Where(x => x.order_id == id).First();
             //List<Order> c = db.Orders.ToList();
            OrderViewModel cs = new OrderViewModel();
            
                     cs.Medicine_Name = s.Medicine_Name;
-                    cs.Quantity = s.Quantity;
-                    cs.Price = s.Price;
+                   // cs.Quantity = s.Quantity;
+                   // cs.Price = s.Price;
             var g = db.Medicines.Where(x => x.Medicine_id == s.medicine_id).First();
             cs.type = g.Type;    
                     //cs.medicine_id = s.medicine_id;
@@ -98,16 +121,16 @@ namespace DB3.Controllers
         {
             try
             {
-                DB3Entities1 db = new DB3Entities1();
+                DB3Entities2 db = new DB3Entities2();
                 
                 var cs = db.Orders.Where(x => x.order_id == id).First();
                 List<Order> c = db.Orders.ToList();
                 
                         s.Medicine_Name = cs.Medicine_Name;
-                        s.Quantity = cs.Quantity;
-                        s.Price = cs.Price;
+                       // s.Quantity = cs.Quantity;
+                       // s.Price = cs.Price;
                 // var g = db.Medicines.Where()
-                        s.medicine_id = cs.medicine_id;
+                       // s.medicine_id = cs.medicine_id;
                         db.SaveChanges();
                     
                 // TODO: Add update logic here

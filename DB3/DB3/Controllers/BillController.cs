@@ -13,7 +13,7 @@ namespace DB3.Controllers
         public ActionResult Index()
         {
 
-            DB3Entities1 db = new DB3Entities1();
+            DB3Entities2 db = new DB3Entities2();
             List<Bill> b = new List<Bill>();
             List<BillViewModel> bl = new List<BillViewModel>();
             BillViewModel bi = new BillViewModel();
@@ -25,8 +25,8 @@ namespace DB3.Controllers
                // Medicine c = db.Medicines.Where(x => x.Medicine_id == s.medicine_id).First();
                 Order c = db.Orders.Where(x => x.order_id == o.OrderID).First();
                 bi.OrderID = c.order_id;
-                bi.Price = c.Price;
-                bi.Quantity = c.Quantity;
+               // bi.Price = c.Price;
+               // bi.Quantity = c.Quantity;
                 bl.Add(bi);
                 
             }
@@ -54,7 +54,7 @@ namespace DB3.Controllers
         {
             try
             {
-                DB3Entities1 db = new DB3Entities1();
+                DB3Entities2 db = new DB3Entities2();
                 Bill b = new Bill();
                 b.Date = s.Date;
                 b.Price = s.Price;
